@@ -1,0 +1,5 @@
+# Default variable settings
+
+mariadb_root_password: password
+mariadb_port: 3306
+sel_disable: true
