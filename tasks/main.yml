@@ -20,6 +20,14 @@
    - libselinux-python
    - libsemanage-python
 
+- name: Create MariaDB log file
+  file:
+    path: /var/log/mysqld.log
+    state: touch
+    owner: mysql
+    group: mysql
+    mode: 0775
+
 - name: MariaDB SELinux configuration
   block:
     - name: Configure SELinux to start mysql on any port
@@ -47,50 +55,41 @@
         state: present
         reload: yes
 
+    - name: Reload SELinux connection for mysqld.log
+      command: restorecon -v /var/log/mysqld.log
+
   when: sel_disable == false
 
 - name: Create Mysql configuration file
   template:
     src: my.cnf.j2
     dest: /etc/my.cnf
-  notify:
-    - restart mariadb
-
-#- name: Create MariaDB log file
-#  file:
-#    path: /var/log/mysqld.log
-#    state: touch
-#    owner: mysql
-#    group: mysql
-#    mode: 0775
-
-- name: Reload SELinux connection for mysqld.log
-  command: restorecon -v /var/log/mysqld.log
-  when: sel_disable == false
 
 - name: Start MariaDB Service
   service:
     name: mariadb
     state: started
     enabled: yes
+  notify: restart mariadb
+  ignore_errors: true
 
-#- name: Set MariaDB root user password
-#  mysql_user:
-#    name: root
-#    host: localhost
-#    password: "{{ mariadb_root_password }}"
-#    check_implicit_admin: yes
-#    login_user: root
-#    login_password: ""
-#    state: present
-#  notify:
-#    - restart mariadb
+- name: Set MariaDB root user password
+  mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mariadb_root_password }}"
+    check_implicit_admin: yes
+    login_user: root
+    login_password: ""
+    state: present
+  notify: restart mariadb
+  when: mariadb_set_root_password == true
 
-#- name: Add firewalld rule for MariaDB to open port {{ mariadb_port }}
-#  firewalld:
-#    port: "{{ mariadb_port }}/tcp"
-#    permanent: true
-#    state: enabled
-#    immediate: yes
-#  when: open_mariadb_port == true
-#  ignore_errors: true
+- name: Add firewalld rule for MariaDB to open port {{ mariadb_port }}
+  firewalld:
+    port: "{{ mariadb_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: yes
+  when: mariadb_open_port == true
+  ignore_errors: true

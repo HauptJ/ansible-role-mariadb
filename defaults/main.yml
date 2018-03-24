@@ -1,5 +1,8 @@
 # Default variable settings
 
+sel_disable: true
+
 mariadb_root_password: password
 mariadb_port: 3306
-sel_disable: true
+mariadb_open_port: false
+mariadb_set_root_password: false
