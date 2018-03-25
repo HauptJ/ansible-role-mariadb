@@ -15,10 +15,10 @@
     name: "{{ item }}"
     state: latest
   with_items:
-   - MariaDB-server
-   - MySQL-python
-   - libselinux-python
-   - libsemanage-python
+    - MariaDB-server
+    - MySQL-python
+    - libselinux-python
+    - libsemanage-python
 
 - name: Create MariaDB log file
   file:
