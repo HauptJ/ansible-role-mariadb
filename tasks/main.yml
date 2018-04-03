@@ -1,3 +1,10 @@
+# @Author: Haupt Joshua <HauptJ>
+# @Date:   26-Mar-2018
+# @Email:  josh@hauptj.com
+# @Filename: main.yml
+# @Last modified by:   HauptJ
+# @Last modified time: 02-Apr-2018
+
 ---
 # This playbook will install MariaDB and create db user and give permissions.
 
@@ -28,36 +35,8 @@
     group: mysql
     mode: 0775
 
-- name: MariaDB SELinux configuration
-  block:
-    - name: Configure SELinux to start mysql on any port
-      seboolean:
-        name: mysql_connect_any
-        state: true
-        persistent: yes
-
-    # SELinux policies: https://mariadb.com/kb/en/library/what-to-do-if-mariadb-doesnt-start/
-
-    - name: set the SELinux policy for Mariadb data directory
-      sefcontext:
-        target: '/var/lib/mysql(/.*)?'
-        setype: mysqld_db_t
-        state: present
-        reload: yes
-
-    - name: Reload SELinux connection for MariaDB data directory
-      command: restorecon -Rv /var/lib/mysql
-
-    - name: set the SELinux policy for Mariadb log file
-      sefcontext:
-        target: '/var/log/mysql(/.*)?'
-        setype: mysqld_log_t
-        state: present
-        reload: yes
-
-    - name: Reload SELinux connection for mysqld.log
-      command: restorecon -v /var/log/mysqld.log
-
+- name: Configure SELinux
+  include_tasks: selinux.yml
   when: sel_disable == false
 
 - name: Create Mysql configuration file
@@ -72,6 +51,10 @@
     enabled: yes
   notify: restart mariadb
   ignore_errors: true
+
+- name: Setup database
+  include_tasks: database.yml
+  when: mariadb_wp_db == true
 
 - name: Set MariaDB root user password
   mysql_user:

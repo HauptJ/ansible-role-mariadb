@@ -1,11 +1,16 @@
+# @Author: Haupt Joshua <HauptJ>
+# @Date:   26-Mar-2018
+# @Email:  josh@hauptj.com
+# @Filename: .travis.yml
+# @Last modified by:   HauptJ
+# @Last modified time: 02-Apr-2018
+
 ---
 sudo: required
 
 env:
   - distribution: centos
     version: 7
-  #- distribution: ubuntu
-  #  version: xenial
 
 services:
   - docker
@@ -24,4 +29,4 @@ script:
 #    | grep -q 'changed=0.*failed=0'
 #    && (echo 'Idempotence test: pass' && exit 0)
 #    || (echo 'Idempotence test: fail' && exit 1)
-#  - 'sudo docker rm -f "$(cat ${container_id})"'
+  - 'sudo docker rm -f "$(cat ${container_id})"'

@@ -1,3 +1,10 @@
+# @Author: Haupt Joshua <HauptJ>
+# @Date:   26-Mar-2018
+# @Email:  josh@hauptj.com
+# @Filename: main.yml
+# @Last modified by:   HauptJ
+# @Last modified time: 02-Apr-2018
+
 # Default variable settings
 
 sel_disable: true
@@ -6,3 +13,13 @@ mariadb_root_password: password
 mariadb_port: 3306
 mariadb_open_port: false
 mariadb_set_root_password: false
+
+##### WordPress #####
+
+mariadb_wp_db: true
+
+# These are the WordPress database settings
+wp_new_db: true
+wp_db_name: testWP
+wp_db_user: testWPuser
+wp_db_password: 1337TestPass
