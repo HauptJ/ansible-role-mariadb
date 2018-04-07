@@ -2,8 +2,8 @@
 # @Date:   26-Mar-2018
 # @Email:  josh@hauptj.com
 # @Filename: main.yml
-# @Last modified by:   HauptJ
-# @Last modified time: 02-Apr-2018
+# @Last modified by:   Haupt Joshua
+# @Last modified time: 07-Apr-2018
 
 ---
 # This playbook will install MariaDB and create db user and give permissions.
@@ -54,7 +54,6 @@
 
 - name: Setup database
   include_tasks: database.yml
-  when: mariadb_wp_db == true
 
 - name: Set MariaDB root user password
   mysql_user:
