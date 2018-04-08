@@ -3,7 +3,7 @@
 # @Email:  josh@hauptj.com
 # @Filename: wordpress.yml
 # @Last modified by:   Haupt Joshua
-# @Last modified time: 07-Apr-2018
+# @Last modified time: 08-Apr-2018
 
 ---
   # Tasks to setup WordPress database
@@ -14,31 +14,31 @@
     name: test
     state: absent
 
-- name: Create new database {{ maria_db_name }}
+- name: Create new database {{ mariadb_db_name }}
   mysql_db:
-    name: "{{ maria_db_name }}"
+    name: "{{ mariadb_db_name }}"
     state: present
   when: mariadb_new_db == true
 
-- name: Load existing database {{ maria_db_name }}
+- name: Load existing database {{ mariadb_db_name }} from file {{ mariadb_db_file_name }}
   block:
-    - name: Copy database {{ maria_db_name }} file
+    - name: Copy database {{ mariadb_db_file_name }}
       copy:
-        src: "{{ maria_db_name }}.sql.bz2"
-        dest: /tmp
+        src: "databases/{{ mariadb_db_file_name }}"
+        dest: "/tmp/{{ mariadb_db_file_name }}"
 
-    - name: Restore database {{ maria_db_user }}
+    - name: Restore database {{ mariadb_db_name }}
       mysql_db:
-        name: "{{ maria_db_name }}"
+        name: "{{ mariadb_db_name }}"
         state: import
-        target: /tmp/{{ maria_db_name }}.sql.bz2
+        target: "/tmp/{{ mariadb_db_file_name }}"
 
   when: mariadb_new_db == false
 
-- name: Create new database user {{ maria_db_user }}
+- name: Create new database user {{ mariadb_db_user }}
   mysql_user:
-    name: "{{ maria_db_user }}"
-    password: "{{ maria_db_password }}"
-    priv: "{{ maria_db_name }}.*:ALL"
+    name: "{{ mariadb_db_user }}"
+    password: "{{ mariadb_db_user_password }}"
+    priv: "{{ mariadb_db_name }}.*:ALL"
     host: 'localhost'
     state: present
