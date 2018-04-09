@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Joshua Haupt
+  description: Installs MariaDB and either creates or imports a database
+  company: hauptj.com
+  license: Apache 2.0
+  min_ansible_version: 2.3
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  galaxy_tags:
+    - mariadb
+    - mysql
+dependencies:
+  - { role: geerlingguy.repo-epel }
+  - { role: geerlingguy.repo-remi }
