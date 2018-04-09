@@ -25,4 +25,4 @@ mariadb_db_user_password: 1337TestPass
 
 # filename of existing database
 # NOTE: if mariadb_new_db == false
-mariadb_db_file_name: test.sql
+mariadb_db_file_name: testWP.sql
