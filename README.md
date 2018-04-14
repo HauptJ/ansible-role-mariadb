@@ -6,7 +6,7 @@ either uncompressed / ```.sql``` or compressed in a ```.bz2``` archive. **See:**
 
 [![Build Status](https://travis-ci.org/HauptJ/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/HauptJ/ansible-role-mariadb)
 
-**Ansible Galaxy:** HauptJ.mariadb
+**Ansible Galaxy:** [HauptJ.mariadb](https://galaxy.ansible.com/HauptJ/mariadb/)
 
 
 ## Variables
