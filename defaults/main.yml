@@ -26,3 +26,6 @@ mariadb_db_user_password: 1337TestPass
 # filename of existing database
 # NOTE: if mariadb_new_db == false
 mariadb_db_file_name: testWP.sql
+
+# CI test, this should only be set to true for testing
+mariadb_ci_test: true
