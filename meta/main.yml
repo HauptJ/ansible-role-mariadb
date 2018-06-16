@@ -21,8 +21,8 @@ galaxy_info:
     - mysql
     - database
     - sql
-dependencies:
-  - role: geerlingguy.repo-epel
-    when: mariadb_ci_test == true
-  - role: geerlingguy.repo-remi
-    when: mariadb_ci_test == true
+# dependencies:
+#   - role: geerlingguy.repo-epel
+#     when: mariadb_ci_test == true
+#   - role: geerlingguy.repo-remi
+#     when: mariadb_ci_test == true

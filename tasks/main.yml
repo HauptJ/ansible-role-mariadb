@@ -17,7 +17,7 @@
     gpgcheck: yes
     enabled: yes
 
-- name: Install MariaDB package
+- name: Install MariaDB packages
   yum:
     name: "{{ item }}"
     state: latest
@@ -53,7 +53,7 @@
   ignore_errors: true
 
 - name: Setup database
-  include_tasks: database.yml
+  import_tasks: database.yml
 
 - name: Set MariaDB root user password
   mysql_user:
