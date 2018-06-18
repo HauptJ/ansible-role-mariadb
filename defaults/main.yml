@@ -23,6 +23,7 @@ mariadb_db_name: testWP
 mariadb_db_user: testWPuser
 mariadb_db_user_password: 1337TestPass
 
+mariadb_db_backup_dir: databases
 # filename of existing database
 # NOTE: if mariadb_new_db == false
 mariadb_db_file_name: testWP.sql

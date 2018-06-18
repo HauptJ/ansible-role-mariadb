@@ -7,7 +7,6 @@
 
 ---
   # Tasks to setup WordPress database
-  # TODO: Refactor variable names
 
 - name: Remove the test database
   mysql_db:
@@ -24,7 +23,7 @@
   block:
     - name: Copy database {{ mariadb_db_file_name }}
       copy:
-        src: "databases/{{ mariadb_db_file_name }}"
+        src: "{{ mariadb_db_backup_dir }}/{{ mariadb_db_file_name }}"
         dest: "/tmp/{{ mariadb_db_file_name }}"
 
     - name: Restore database {{ mariadb_db_name }}
