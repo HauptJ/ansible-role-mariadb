@@ -68,3 +68,5 @@
     immediate: yes
   when: mariadb_open_port == true
   ignore_errors: true
+  tags:
+    - firewalld
