@@ -10,7 +10,9 @@
   mysql_db:
     name: "{{ mariadb_db_name }}"
     state: present
-  when: mariadb_new_db == true
+  #when: mariadb_new_db == true
+  tags:
+    - new
 
 - name: Load existing database {{ mariadb_db_name }} from file {{ mariadb_db_file_name }}
   block:
@@ -25,7 +27,9 @@
         state: import
         target: "/tmp/{{ mariadb_db_file_name }}"
 
-  when: mariadb_new_db == false
+  #when: mariadb_new_db == false
+  tags:
+    - restore
 
 - name: Create new database user {{ mariadb_db_user }}
   mysql_user:
