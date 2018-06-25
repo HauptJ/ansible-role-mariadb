@@ -30,7 +30,7 @@
 
 - name: Configure SELinux
   include_tasks: selinux.yml
-  when: sel_disable == false
+  #when: sel_disable == false
   tags:
     - selinux
 
