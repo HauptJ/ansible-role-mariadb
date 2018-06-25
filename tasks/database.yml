@@ -1,13 +1,5 @@
-# @Author: Haupt Joshua <HauptJ>
-# @Date:   02-Apr-2018
-# @Email:  josh@hauptj.com
-# @Filename: wordpress.yml
-# @Last modified by:   Haupt Joshua
-# @Last modified time: 08-Apr-2018
-
 ---
   # Tasks to setup WordPress database
-  # TODO: Refactor variable names
 
 - name: Remove the test database
   mysql_db:
@@ -18,13 +10,15 @@
   mysql_db:
     name: "{{ mariadb_db_name }}"
     state: present
-  when: mariadb_new_db == true
+  #when: mariadb_new_db == true
+  tags:
+    - new
 
 - name: Load existing database {{ mariadb_db_name }} from file {{ mariadb_db_file_name }}
   block:
     - name: Copy database {{ mariadb_db_file_name }}
       copy:
-        src: "databases/{{ mariadb_db_file_name }}"
+        src: "{{ mariadb_db_backup_dir }}/{{ mariadb_db_file_name }}"
         dest: "/tmp/{{ mariadb_db_file_name }}"
 
     - name: Restore database {{ mariadb_db_name }}
@@ -33,7 +27,9 @@
         state: import
         target: "/tmp/{{ mariadb_db_file_name }}"
 
-  when: mariadb_new_db == false
+  #when: mariadb_new_db == false
+  tags:
+    - restore
 
 - name: Create new database user {{ mariadb_db_user }}
   mysql_user:

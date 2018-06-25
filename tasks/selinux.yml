@@ -1,10 +1,3 @@
-# @Author: Haupt Joshua <HauptJ>
-# @Date:   02-Apr-2018
-# @Email:  josh@hauptj.com
-# @Filename: selinux.yml
-# @Last modified by:   HauptJ
-# @Last modified time: 02-Apr-2018
-
 ---
   # Tasks to configure SELinux for MariaDB
 

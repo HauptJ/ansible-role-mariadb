@@ -1,10 +1,3 @@
-# @Author: Haupt Joshua <HauptJ>
-# @Date:   26-Mar-2018
-# @Email:  josh@hauptj.com
-# @Filename: main.yml
-# @Last modified by:   Haupt Joshua
-# @Last modified time: 07-Apr-2018
-
 ---
 # This playbook will install MariaDB and create db user and give permissions.
 
@@ -17,7 +10,7 @@
     gpgcheck: yes
     enabled: yes
 
-- name: Install MariaDB package
+- name: Install MariaDB packages
   yum:
     name: "{{ item }}"
     state: latest
@@ -38,6 +31,8 @@
 - name: Configure SELinux
   include_tasks: selinux.yml
   when: sel_disable == false
+  tags:
+    - selinux
 
 - name: Create Mysql configuration file
   template:
@@ -53,7 +48,7 @@
   ignore_errors: true
 
 - name: Setup database
-  include_tasks: database.yml
+  import_tasks: database.yml
 
 - name: Set MariaDB root user password
   mysql_user:
@@ -75,3 +70,5 @@
     immediate: yes
   when: mariadb_open_port == true
   ignore_errors: true
+  tags:
+    - firewalld
