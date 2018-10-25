@@ -3,7 +3,7 @@
 # @Email:  josh@hauptj.com
 # @Filename: main.yml
 # @Last modified by:   Haupt Joshua
-# @Last modified time: 08-Apr-2018
+# @Last modified time: 25-Oct-2018
 
 # Default variable settings
 
@@ -11,7 +11,7 @@ sel_disable: true
 
 mariadb_root_password: password
 mariadb_port: 3306
-mariadb_open_port: false
+# mariadb_open_port: false TODO: remove
 mariadb_set_root_password: true
 
 # These are the WordPress database settings

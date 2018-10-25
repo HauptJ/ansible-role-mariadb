@@ -62,13 +62,13 @@
   notify: restart mariadb
   when: mariadb_set_root_password == true
 
-- name: Add firewalld rule for MariaDB to open port {{ mariadb_port }}
-  firewalld:
-    port: "{{ mariadb_port }}/tcp"
-    permanent: true
-    state: enabled
-    immediate: yes
-  when: mariadb_open_port == true
-  ignore_errors: true
-  tags:
-    - firewalld
+# - name: Add firewalld rule for MariaDB to open port {{ mariadb_port }}
+#   firewalld:
+#     port: "{{ mariadb_port }}/tcp"
+#     permanent: true
+#     state: enabled
+#     immediate: yes
+#   when: mariadb_open_port == true
+#   ignore_errors: true
+#   tags:
+#     - firewalld
