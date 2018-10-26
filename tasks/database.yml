@@ -10,7 +10,6 @@
   mysql_db:
     name: "{{ mariadb_db_name }}"
     state: present
-  #when: mariadb_new_db == true
   tags:
     - new
 
@@ -27,7 +26,6 @@
         state: import
         target: "/tmp/{{ mariadb_db_file_name }}"
 
-  #when: mariadb_new_db == false
   tags:
     - restore
 
