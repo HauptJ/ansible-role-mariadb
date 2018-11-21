@@ -12,13 +12,12 @@
 
 - name: Install MariaDB packages
   yum:
-    name: "{{ item }}"
+    name:
+      - MariaDB-server
+      - MySQL-python
+      - libselinux-python
+      - libsemanage-python
     state: latest
-  with_items:
-    - MariaDB-server
-    - MySQL-python
-    - libselinux-python
-    - libsemanage-python
 
 - name: Create MariaDB log file
   file:
